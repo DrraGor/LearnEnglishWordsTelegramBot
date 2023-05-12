@@ -3,8 +3,7 @@ package additional
 import java.io.File
 
 fun main() {
-    var outputWasSelected = false
-
+   
     val wordsFile = File("words.txt")
     wordsFile.createNewFile()
 
@@ -17,7 +16,7 @@ fun main() {
         dictionary.add(Word(line[0].trim(), line[1].trim(), line[2].trim().toIntOrNull() ?: 0))
     }
 
-    while (!outputWasSelected) {
+    while (true) {
         println("Меню: 1 – Учить слова, 2 – Статистика, 0 – Выход")
         when (readln().toIntOrNull()) {
             null -> println("Некорректный ввод, попробуйте ещё раз")
@@ -28,7 +27,7 @@ fun main() {
                 println()
             }
 
-            0 -> outputWasSelected = true
+            0 -> break
         }
     }
 }
