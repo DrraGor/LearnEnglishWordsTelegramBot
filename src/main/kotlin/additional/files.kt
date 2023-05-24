@@ -37,23 +37,23 @@ fun main() {
                     println("Выберите перевод слова: ${translatedWord.text}")
                     printVariantsWords(unexploredWords)
 
-                    when (val answer = readLine()?.toIntOrNull()?.minus(1)) {
+                    when (val answer = readLine()?.toIntOrNull()) {
 
                         null -> println("Некорректный ввод, попробуйте ещё раз")
 
-                        -1 -> break
+                        0 -> break
 
                         else -> {
 
-                            if (unexploredWords[answer].hashCode() == translatedWord.hashCode()) {
+                            if (unexploredWords[answer - 1].hashCode() == translatedWord.hashCode()) {
                                 println("Вы ответили правильно")
-                                val a = dictionary.indexOf(translatedWord)
-                                dictionary[a].correctAnswer += 1
+                                val correctAnswerIndex = dictionary.indexOf(translatedWord)
+                                dictionary[correctAnswerIndex].correctAnswer += 1
 
 
-                                break
+                                continue
                             } else println("Ответ не верный")
-                            break
+                            continue
                         }
                     }
                 }
@@ -61,9 +61,7 @@ fun main() {
 
             2 -> {
                 val learnedWords = dictionary.filter { it.correctAnswer >= 3 }
-                println("Выучено ${learnedWords.size} из ${dictionary.size} слов | ${learnedWords.size * (100 / dictionary.size)}%")
-                println()
-
+                println("Выучено ${learnedWords.size} из ${dictionary.size} слов | ${learnedWords.size * (100 / dictionary.size)}%\n")
             }
 
             0 -> break
@@ -72,7 +70,9 @@ fun main() {
     }
 }
 
-// Функция для вывода на печать набора ответов
+/**
+Function for printing a set of responses
+ */
 fun printVariantsWords(words: List<Word>) {
     println(
         """
@@ -86,15 +86,18 @@ fun printVariantsWords(words: List<Word>) {
     )
 }
 
-// Функуия служит для "набивки" нового комплекта слов для изучения.
-// Если невыученных слов меньше 4х добавляет в список уже выученные до комплекта.
-// Если это не сделать то при одном оставшемся слове будет предложен только один правильный вариант ответа
-// Невыученные слова всегда первые по индексу
+/**
+The function is used to "stuff" a new set of words to study.
+If the unlearned words are less than 4x, it adds to the list those already learned before the set.
+If this is not done, then with one remaining word, only one correct answer will be offered
+Unlearned words are always first in the index
+ */
 fun makeNewRoundListening(unexploredWords: List<Word>, dictionary: List<Word>): List<Word> {
+    val exploredWords = dictionary.filter { it.correctAnswer >= 3 }
     if (unexploredWords.size >= 3) return unexploredWords.take(4)
     else {
         while (unexploredWords.size < 3) {
-            val newWord = dictionary.random()
+            val newWord = exploredWords.random()
             if (!unexploredWords.contains(newWord)) unexploredWords.plus(newWord)
         }
     }
