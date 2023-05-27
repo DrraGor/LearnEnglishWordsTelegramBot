@@ -7,6 +7,7 @@ fun main() {
     val wordsFile = File("words.txt")
     wordsFile.createNewFile()
 
+
     val dictionary = mutableListOf<Word>()
 
     val lines: List<String> = wordsFile.readLines()
@@ -49,8 +50,7 @@ fun main() {
                                 println("Вы ответили правильно")
                                 val correctAnswerIndex = dictionary.indexOf(translatedWord)
                                 dictionary[correctAnswerIndex].correctAnswer += 1
-
-
+                                saveDictionary(dictionary)
                                 continue
                             } else println("Ответ не верный")
                             continue
@@ -68,6 +68,16 @@ fun main() {
 
         }
     }
+}
+
+/**
+Function for saving the response result
+ */
+fun saveDictionary(dictionary: List<Word>) {
+    val file = File("words.txt")
+    file.delete()
+    // dictionary.forEach { file.writeText(it.toStr()) }  //Почему у меня не работает запись через writeText я разобраться не смог.
+    dictionary.forEach { file.appendText(it.wordToString()) }
 }
 
 /**
@@ -110,7 +120,12 @@ data class Word(
     val translate: String,
     var correctAnswer: Int,
 ) {
-    override fun toString(): String {
-        return "Word(text= '$text', translate= '$translate', correctAnswer= '$correctAnswer')"
+
+
+    /**
+    Function for printing a set of responses
+     */
+    fun wordToString(): String {
+        return "$text | $translate | $correctAnswer\n"
     }
 }
