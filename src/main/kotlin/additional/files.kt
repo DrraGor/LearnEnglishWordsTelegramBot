@@ -76,7 +76,6 @@ Function for saving the response result
 fun saveDictionary(dictionary: List<Word>) {
     val file = File("words.txt")
     file.delete()
-    // dictionary.forEach { file.writeText(it.toStr()) }  //Почему у меня не работает запись через writeText я разобраться не смог.
     dictionary.forEach { file.appendText(it.wordToString()) }
 }
 
