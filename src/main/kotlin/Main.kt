@@ -1,3 +1,4 @@
+
 data class Word(
     val questionWord: String,
     val translate: String,
