@@ -13,7 +13,7 @@ fun Question.asConsoleString(): String {
 
 fun main() {
 
-    val trainer = LearnWordsTrainer()
+    val trainer = LearnWordsTrainer("words.txt", 3, 4)
 
     while (true) {
 
@@ -50,7 +50,6 @@ fun main() {
             }
 
             0 -> break
-
         }
     }
 }
