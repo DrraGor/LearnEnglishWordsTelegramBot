@@ -6,13 +6,13 @@ import java.net.http.HttpResponse
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-const val HTTP_TELEGRAM = "https://api.telegram.org/bot"
-const val LEARN_WORDS_BUTTON_CLICKED = "learn_words_clicked"
-const val STATISTIC_BUTTON_CLICKED = "statistics_clicked"
-const val CALLBACK_DATA_ANSWER_PREFIX = "answer_"
-
-class TelegramBotService(botToken_: String) {
-    private val botToken = botToken_
+class TelegramBotService(private val botToken: String) {
+    companion object{
+        const val HTTP_TELEGRAM = "https://api.telegram.org/bot"
+        const val LEARN_WORDS_BUTTON_CLICKED = "learn_words_clicked"
+        const val STATISTIC_BUTTON_CLICKED = "statistics_clicked"
+        const val CALLBACK_DATA_ANSWER_PREFIX = "answer_"
+    }
 
     fun sendMessage(chatId: String, text: String) {
         val encoded = URLEncoder.encode(
@@ -166,7 +166,5 @@ class TelegramBotService(botToken_: String) {
         if (question != null) {
             sendQuestion(botToken, chatId, question)
         } else sendMessage(chatId, "Вы выучили все слова в базе")
-
     }
-
 }
