@@ -17,7 +17,7 @@ class LearnWordsTrainer(
     _numberVariantsAnswers: Int,
 ) {
     private var wordsFile = File(_fileName)
-    private var question: Question? = null
+    var question: Question? = null
     private var dictionary = loadDictionary()
     private var limitCorrectAnswers = _limitCorrectAnswers
     private var numberVariantsAnswers = _numberVariantsAnswers
@@ -43,6 +43,7 @@ class LearnWordsTrainer(
     }
 
     fun checkAnswer(userAnswerIndex: Int?): Boolean {
+
         return question?.let {
             val correctAnswerId = it.variants.indexOf(it.correctAnswer)
             if (correctAnswerId == userAnswerIndex) {
