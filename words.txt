@@ -1,5 +1,9 @@
-hello|привет|1
-dog|собака|1
+hello|привет|0
+dog|собака|0
 snake|змея|0
 turtle|черепаха|0
 cat|кошка|0
+a few|несколько|0
+a little|немного|0
+abandoned|покидать|0
+ability|способность|0
