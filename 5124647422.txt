@@ -1,18 +1,18 @@
-hello|привет|0
-dog|собака|0
-snake|змея|0
-turtle|черепаха|0
-cat|кошка|0
-a few|несколько|0
-a little|немного|0
-a table|стол|0
-dozen|дюжина|0
-abac|счеты|0
-aback|назад|0
-abandon|покидать|0
-abdomen|живот|0
-abdominal|брюшной|0
-abducent|отводящий|0
+hello|привет|3
+dog|собака|3
+snake|змея|3
+turtle|черепаха|3
+cat|кошка|3
+a few|несколько|3
+a little|немного|3
+a table|стол|3
+dozen|дюжина|3
+abac|счеты|3
+aback|назад|3
+abandon|покидать|2
+abdomen|живот|1
+abdominal|брюшной|1
+abducent|отводящий|1
 aberrance|заблуждение|0
 abhor|ненавидеть|0
 abidance|соответствие|0

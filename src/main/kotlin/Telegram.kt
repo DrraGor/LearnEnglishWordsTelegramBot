@@ -69,21 +69,21 @@ data class InlineKeyboard(
 
 fun main(args: Array<String>) {
 
-    val botToken = args[0]
     var lastUpdateId = 0L
-    val botService = TelegramBotService(botToken)
+    val botService = TelegramBotService(args[0])
+
     val json = Json { ignoreUnknownKeys = true }
     val trainers = HashMap<Long, LearnWordsTrainer>()
 
     while (true) {
         Thread.sleep(2000)
-        val responseString: String = botService.getUpdates(lastUpdateId, botToken)
-        println(responseString)
 
+        val result = runCatching { botService.getUpdates(lastUpdateId) }
+        val responseString = result.getOrNull() ?: continue
         val response: Response = json.decodeFromString(responseString)
         if(response.result.isEmpty()) continue
         val sortedUpdates = response.result.sortedBy { it.updateId }
-        sortedUpdates.forEach { botService.handleUpdate(it, json, botToken, trainers) }
+        sortedUpdates.forEach { botService.handleUpdate(it, json, trainers) }
         lastUpdateId = sortedUpdates.last().updateId + 1
 
     }
