@@ -1,9 +1,5 @@
+import java.lang.Exception
 
-data class Word(
-    val questionWord: String,
-    val translate: String,
-    var correctAnswerCount: Int,
-)
 
 fun Question.asConsoleString(): String {
     val variants = this.variants
@@ -14,7 +10,12 @@ fun Question.asConsoleString(): String {
 
 fun main() {
 
-    val trainer = LearnWordsTrainer("words.txt", 3, 4)
+    val trainer = try{
+        LearnWordsTrainer("words.txt",  3,  4)
+    } catch (e: Exception) {
+        println("Невозможно загрузить словарь")
+        return
+    }
 
     while (true) {
 
